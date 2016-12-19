@@ -22,6 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
+    modulesDirectories: [path.join(__dirname, '../node_modules')],
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'app': path.resolve(__dirname, '../src/app'),
@@ -95,8 +96,11 @@ module.exports = {
     loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
     postcss: [
       require('autoprefixer')({
-        browsers: ['last 2 versions']
+        browsers: ['last 2 versions', 'ie >= 9', 'and_chr >= 2.3']
       })
     ]
+  },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "node_modules")]
   }
 }

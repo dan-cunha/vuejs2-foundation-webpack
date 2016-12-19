@@ -30,6 +30,7 @@ module.exports = {
 
     'import/no-unresolved': 0,
     'import/imports-first': 0,
+    'comma-dangle': 0,
 
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {

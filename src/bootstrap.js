@@ -75,7 +75,9 @@ Vue.use(VueRouter);
 
 export const router = new VueRouter({
   routes,
+  mode: 'history'
 });
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth) && !store.state.auth.authenticated) {
     /*
@@ -91,7 +93,7 @@ router.beforeEach((to, from, next) => {
      * an guest page, redirect to the dashboard page
      */
     next({
-      name: 'home.index',
+      name: 'storefront.index',
     });
   } else {
     next();
@@ -101,80 +103,14 @@ VuexRouterSync.sync(store, router);
 
 Vue.router = router;
 
-
-/* ============
- * Vue i18n
- * ============
- *
- * Internationalization plugin of Vue.js
- *
- * https://kazupon.github.io/vue-i18n/
- */
-import VueI18n from 'vue-i18n';
-import locale from './app/locale';
-
-Vue.use(VueI18n);
-
-Vue.config.lang = 'en';
-
-Object.keys(locale).forEach((lang) => {
-  Vue.locale(lang, locale[lang]);
-});
-
-
-/* ============
- * jQuery
- * ============
- *
- * Require jQuery
- *
- * http://jquery.com/
- */
 import jQuery from 'jquery';
 
 window.$ = window.jQuery = jQuery;
 
+require('foundation-sites/dist/js/foundation.min.js');
 
-/* ============
- * Bootstrap
- * ============
- *
- * Require bootstrap
- *
- * http://getbootstrap.com/
- */
-require('bootstrap');
-require('bootstrap/less/bootstrap.less');
-
-
-/* ============
- * Font Awesome
- * ============
- *
- * Require font-awesome
- *
- * http://http://fontawesome.io/
- */
-require('font-awesome/less/font-awesome.less');
-
-
-/* ============
- * Styling
- * ============
- *
- * Require the application styling.
- * Stylus is used for this boilerplate.
- *
- * If you don't want to use Stylus, that's fine!
- * Replace the stylus directory with the CSS preprocessor you want.
- * Require the entry point here & install the webpack loader.
- *
- * It's that easy...
- *
- * http://stylus-lang.com/
- */
-require('./assets/stylus/app.styl');
-
+require('font-awesome/scss/font-awesome.scss');
+require('./assets/app.scss');
 
 export default {
   router,
